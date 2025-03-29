@@ -1,0 +1,87 @@
+body {
+    margin: 0;
+    font-family: "Ribeye Marrow", serif; /* Use a unique font for the body */
+    background-color: #f4f4f4;
+}
+
+main {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    min-height: 100vh; /* Ensure the main section takes full height of the viewport */  
+    text-align: center; /* Center text within the main section */
+    background: #89CFF0;
+}
+
+main p {
+    text-align: center;
+    margin: 20px 0;
+    width: 80%;
+    line-height: 1.6;
+    font-family: Comic Sans MS, cursive, sans-serif; /* Use a fun font for the paragraph */
+    font-size: 2rem; /* Adjust font size for better readability */
+    padding: 20px; /* Add padding for better spacing */
+    background-color: #ffffff; /* Background color for the paragraph */
+    border: 2px solid #89CFF0; /* Border around the paragraph */
+    border-radius: 10px; /* Rounded corners for the paragraph */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+}
+
+*{
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    box-sizing: border-box; /* Use border-box for consistent sizing */
+}
+
+
+
+header {
+    background: #89CFF0;
+    color: #ffffff;
+    padding-top: 30px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+img.network-tree {
+    width: 80%; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
+    border: 50px solid #89CFF0; /* Optional: Add a border around the image */
+    display: block; /* Center the image */
+    box-sizing: border-box;
+}
+
+h1 {
+    margin: 0;
+}
+
+nav {
+    margin: 20px 0;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 15px;
+}
+
+nav a:hover {
+    background: #e8491d;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+footer {
+    background: #89CFF0;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
