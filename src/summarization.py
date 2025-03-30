@@ -14,7 +14,6 @@ def main():
     bios = content.split("=== ")
     bios = [bio for bio in bios if bio.strip()]  # Remove empty entries
 
-    # Compute 20 evenly spaced indices
     n = len(bios)
     sample_indices = [int(i * n / 20) for i in range(20)]
 
@@ -28,7 +27,7 @@ def main():
             text = " ".join(lines[1:]).strip()
 
             input_ids = tokenizer.encode("summarize: " + text, return_tensors="pt", max_length=512, truncation=True)
-            output = model.generate(input_ids, min_length=100, max_length=200)
+            output = model.generate(input_ids, min_length=200, max_length=300)
             summary = tokenizer.decode(output[0], skip_special_tokens=True)
             print("summary for", name)
             summarization.write(f"\nSummary for {name}:\n{summary}")
