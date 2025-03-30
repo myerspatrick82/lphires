@@ -1,14 +1,40 @@
 import torch
-from transformers import AutoTokenizer, AutoModelWithLMHead
-
-tokenizer = AutoTokenizer.from_pretrained('T5-base')
-model = AutoModelWithLMHead.from_pretrained('T5-base', return_dict=True)
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
 
-sequence = ("Data science is an interdisciplinary field[10] focused on extracting knowledge from typically large data sets and applying the knowledge and insights from that data to solve problems in a wide range of application domains.[11] The field encompasses preparing data for analysis, formulating data science problems, analyzing data, developing data-driven solutions, and presenting findings to inform high-level decisions in a broad range of application domains. As such, it incorporates skills from computer science, statistics, information science, mathematics, data visualization, information visualization, data sonification, data integration, graphic design, complex systems, communication and business.[12][13] Statistician Nathan Yau, drawing on Ben Fry, also links data science to human–computer interaction: users should be able to intuitively control and explore data.[14][15] In 2015, the American Statistical Association identified database management, statistics and machine learning, and distributed and parallel systems as the three emerging foundational professional communities.[16]")
-inputs = tokenizer.encode("summarize: " +sequence, return_tensors='pt', max_length=512, truncation=True)
+def main():
+    # Load the model
+    tokenizer = AutoTokenizer.from_pretrained("t5-small")
+    model = AutoModelForSeq2SeqLM.from_pretrained("t5-small")
 
-output = model.generate(inputs, min_length=80, max_length=100)
+    # Read and split bios
+    with open("scrape.txt", "r", encoding="utf-8") as f:
+        content = f.read()
 
-summary = tokenizer.decode(output[0])
-print(summary)
+    bios = content.split("=== ")
+    bios = [bio for bio in bios if bio.strip()]  # Remove empty entries
+
+    # Compute 20 evenly spaced indices
+    n = len(bios)
+    sample_indices = [int(i * n / 20) for i in range(20)]
+
+    summarization = open("summarizations.txt", "w", encoding="utf-8")
+
+    for i in sample_indices:
+        bio = bios[i]
+        try:
+            lines = bio.strip().splitlines()
+            name = lines[0].strip("= ").strip()
+            text = " ".join(lines[1:]).strip()
+
+            input_ids = tokenizer.encode("summarize: " + text, return_tensors="pt", max_length=512, truncation=True)
+            output = model.generate(input_ids, min_length=100, max_length=200)
+            summary = tokenizer.decode(output[0], skip_special_tokens=True)
+            print("summary for", name)
+            summarization.write(f"\nSummary for {name}:\n{summary}")
+
+        except Exception as e:
+            print(f"Failed to process {i}: {e}")
+
+if __name__ == "__main__":
+    main()
