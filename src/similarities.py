@@ -4,11 +4,10 @@ import requests
 
 load_dotenv()
 
-API_KEY = os.environ.get("PERPLEXITY_API_KEY")  # Replace this
+API_KEY = os.environ.get("PERPLEXITY_API_KEY")  
 API_URL = "https://api.perplexity.ai/chat/completions"
 
 def main():
-    # Read your prompt instruction
     with open("summarizations.txt", "r", encoding="utf-8") as f:
         summaries = f.read()
 
