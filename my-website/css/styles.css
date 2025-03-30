@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    font-family: "Ribeye Marrow", serif; /* Use a unique font for the body */
+    font-family: "Ribeye", serif; /* Use a unique font for the body */
     background-color: #f4f4f4;
 }
 
@@ -16,25 +16,52 @@ main {
 
 main p {
     text-align: center;
+    display: inline-block;
     margin: 20px 0;
-    width: 80%;
+    width: 90%;
     line-height: 1.6;
-    font-family: Comic Sans MS, cursive, sans-serif; /* Use a fun font for the paragraph */
+    font-family: "Ribeye", serif; /* Use a fun font for the paragraph */
     font-size: 2rem; /* Adjust font size for better readability */
     padding: 20px; /* Add padding for better spacing */
-    background-color: #ffffff; /* Background color for the paragraph */
-    border: 2px solid #89CFF0; /* Border around the paragraph */
-    border-radius: 10px; /* Rounded corners for the paragraph */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
 }
 
-*{
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
-    box-sizing: border-box; /* Use border-box for consistent sizing */
+.expandable-card {
+    background-color: #ffffff; /* Card background color */
+    width: 90%;
+    padding: 20px; /* Padding inside the card */
+    border-radius: 10px; /* Rounded corners for the card */
+    line-height: 1.5; /* Line height for better readability */  
+    text-align: center;
+    margin: 20px;
 }
 
+#ch {
+    display: none;
+}
 
+#ch:checked ~ .card-content {
+    display: block;  
+}
+
+#ch:checked ~ label {
+    display: none;
+}
+
+.card-content {
+    display: none; /* Hide content by default */
+}
+
+label {
+    display: inline-block; /* Display label as inline-block */
+    cursor: pointer; /* Change cursor to pointer for better UX */
+    color: #ffffff; /* Text color for the label */
+    background-color: #89CFF0;
+    padding: 10px 13px; /* Padding around the label text */
+    border-radius: 3px;
+    margin-top: 12px;
+
+
+}
 
 header {
     background: #89CFF0;
