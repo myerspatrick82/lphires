@@ -2,6 +2,8 @@ body {
     margin: 0;
     font-family: "Ribeye", serif; /* Use a unique font for the body */
     background-color: #f4f4f4;
+    justify-content: center;
+    
 }
 
 main {
@@ -11,7 +13,53 @@ main {
     align-items: center; /* Center content horizontally */
     min-height: 100vh; /* Ensure the main section takes full height of the viewport */  
     text-align: center; /* Center text within the main section */
-    background: #89CFF0;
+    background: #fff;
+    background-image: url('../images/sky-34536_1920.png'); /* Set a background image for the body */
+}
+
+.logo {
+    position: absolute; /* Position the logo absolutely to the top left */
+    padding: 15px;
+    top: 20px; /* Adjust the top position */
+    left: 20px; /* Adjust the left position */
+    width: 100px; /* Set a fixed width for the logo */
+    height: auto;
+}
+
+.navbar {
+    position: absolute; /* Position the navbar relative to the page */
+    top: 20px; /* Distance from the top of the page */
+    right: 20px; /* Distance from the right of the page */
+    font-family: "Ribeye", serif; /* Match the site's font */
+}
+
+.navbar ul {
+    list-style: none; /* Remove default list styling */
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li {
+    display: inline; /* Display list items inline */
+    margin-left: 15px; /* Add spacing between items */
+}
+
+.navbar a {
+    text-decoration: none; /* Remove underline from links */
+    color: #fff; /* Set link color */
+    font-size: 1.2rem; /* Adjust font size */
+    padding: 5px 10px; /* Add padding for clickable area */
+    border-radius: 5px; /* Add rounded corners */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.navbar a:hover {
+    background-color: #89CFF0; /* Light blue background on hover */
+    color: #fff; /* White text on hover */
+}
+
+.navbar a:visited {
+    color: #fff; /* Set visited link color */
 }
 
 main p {
@@ -22,17 +70,31 @@ main p {
     line-height: 1.6;
     font-family: "Ribeye", serif; /* Use a fun font for the paragraph */
     font-size: 2rem; /* Adjust font size for better readability */
-    padding: 20px; /* Add padding for better spacing */
+    padding: 10px; /* Add padding for better spacing */
+    color: #fff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .expandable-card {
-    background-color: #ffffff; /* Card background color */
-    width: 90%;
-    padding: 20px; /* Padding inside the card */
+    width: 50%;
+    padding: 22px 30px; /* Padding inside the card */
     border-radius: 10px; /* Rounded corners for the card */
     line-height: 1.5; /* Line height for better readability */  
     text-align: center;
     margin: 20px;
+}
+
+.expandable-card h2 {
+    text-align: center; /* Center the heading text */
+    font-family: "Ribeye", serif; /* Use a fun font for the heading */
+    font-size: 2.5rem; /* Adjust font size for the heading */
+    line-height: 1.5; /* Line height for better readability */
+    color: #fff; /* Text color for the heading */
 }
 
 #ch {
@@ -52,24 +114,18 @@ main p {
 }
 
 label {
-    display: inline-block; /* Display label as inline-block */
+    display: inline-block; /* Make label inline-block for better spacing */
     cursor: pointer; /* Change cursor to pointer for better UX */
     color: #ffffff; /* Text color for the label */
     background-color: #89CFF0;
     padding: 10px 13px; /* Padding around the label text */
     border-radius: 3px;
     margin-top: 12px;
-
+    text-align: center; /* Center text within the label */
 
 }
 
-header {
-    background: #89CFF0;
-    color: #ffffff;
-    padding-top: 30px;
-    padding-bottom: 5px;
-    text-align: center;
-}
+
 
 img.network-tree {
     width: 80%; /* Make the image responsive */
@@ -104,6 +160,7 @@ nav a:hover {
 }
 
 .lets-go-button {
+    display: inline-block;
     background-color: #174e68; /* Baby blue background */
     color: #ffffff; /* White text */
     border: none; /* Remove default border */
