@@ -20,5 +20,9 @@ def start_scraping():
 
     return jsonify({"message": "Scraper started"}), 200
 
+@app.route('/part-one')
+def part_one():
+    return render_template('PartOne.html')
+
 if __name__ == "__main__":
     app.run(debug=True)
