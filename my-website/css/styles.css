@@ -63,11 +63,11 @@ main {
 }
 
 main p {
-    text-align: center;
+    text-align: justify;
     display: inline-block;
     margin: 20px 0;
     width: 90%;
-    line-height: 1.6;
+    line-height: 2;
     font-family: "Ribeye", serif; /* Use a fun font for the paragraph */
     font-size: 2rem; /* Adjust font size for better readability */
     padding: 10px; /* Add padding for better spacing */
@@ -83,7 +83,31 @@ h1 {
     color: #fff;;
 }
 
+.moreText {
+    display: none;
+}
 
+.read-more-btn {
+    display: inline-block; /* Allow the button to be centered */
+    padding : 15px;
+    background-color: #fff;
+    color: black;
+    border: none;
+    border-radius: 10px; /* Rounded corners for the button */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for hover effect */
+    outline: none; /* Remove outline on focus */
+    font-family: "Ribeye", serif; /* Use a fun font for the button */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.text.show-more .moreText {
+    display: inline; /* Hide the additional text by default */
+}
+
+.text.show-more .dots {
+    display: none;
+}
 
 nav {
     margin: 20px 0;
