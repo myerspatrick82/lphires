@@ -26,7 +26,7 @@
         <h1>Welcome to Pathway</h1>
         <p class="text">Pathfinder is an AI-powered career discovery platform that helps users discover data-driven roadmaps to success. 
             By analyzing the journeys of top achievers in each field, Pathfinder offers clear, 
-            proven pathways tailored to the user's interests.
+            proven pathways tailored to the user's interests.<span class="dots">..</span>
             <span class="moreText">Pathway allows users to find their ideal profressional path.
                 By leveraging the data from thousands of real-world career paths,
                 Pathway reverse-engineers the steps taken by top acievers in varoious
@@ -41,7 +41,7 @@
             </span>
         </p>
 
-        <button class="read-more-button">Read More</button>
+        <button class="read-more-btn">Read More</button>
 
         <div class="button-container">
             <a href="{{ url_for('part_one') }}">
@@ -51,8 +51,10 @@
         
         
     </main>
+
     <footer>
         <p>&copy; 2023 Pathway</p>
     </footer>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
