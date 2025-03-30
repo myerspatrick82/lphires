@@ -2,6 +2,7 @@ body {
     margin: 0;
     font-family: "Ribeye", serif; /* Use a unique font for the body */
     background-color: #f4f4f4;
+    justify-content: center;
 }
 
 main {
@@ -33,8 +34,8 @@ main p {
 
 .expandable-card {
     background-color: #ffffff; /* Card background color */
-    width: 90%;
-    padding: 10px; /* Padding inside the card */
+    width: 50%;
+    padding: 22px 30px; /* Padding inside the card */
     border-radius: 10px; /* Rounded corners for the card */
     line-height: 1.5; /* Line height for better readability */  
     text-align: center;
@@ -58,12 +59,13 @@ main p {
 }
 
 label {
+    display: inline-block; /* Make label inline-block for better spacing */
     cursor: pointer; /* Change cursor to pointer for better UX */
     color: #ffffff; /* Text color for the label */
     background-color: #89CFF0;
     padding: 10px 13px; /* Padding around the label text */
     border-radius: 3px;
-    margin: 12px auto;
+    margin-top: 12px;
     text-align: center; /* Center text within the label */
 
 }
