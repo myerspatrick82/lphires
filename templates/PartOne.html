@@ -14,6 +14,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            background-image: url('static/images/sky-34536_1920.png'); /* Set a background image for the body */
         }
 
         .container {
@@ -28,6 +29,10 @@
         h1, h2 {
             font-size: 24px;
             color: #333;
+            font-family: "Rybeye", serif; /* Use the same font as the main page for consistency */
+            display: inline-block; /* To ensure the heading doesn't take full width */
+            margin: 20px auto; /* Center the heading */
+            padding: 5px; /* Add some padding around the heading */
         }
 
         .career-form {
@@ -110,15 +115,88 @@
         #sequential-loading {
             display: none;
         }
+
+        .logo {
+    position: absolute; /* Position the logo absolutely to the top left */
+    padding: 15px;
+    top: 20px; /* Adjust the top position */
+    left: 20px; /* Adjust the left position */
+    width: 100px; /* Set a fixed width for the logo */
+    height: auto;
+}
+
+.navbar {
+    position: absolute; /* Position the navbar relative to the page */
+    top: 20px; /* Distance from the top of the page */
+    right: 20px; /* Distance from the right of the page */
+    font-family: "Ribeye", serif; /* Match the site's font */
+}
+
+.navbar ul {
+    list-style: none; /* Remove default list styling */
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li {
+    display: inline; /* Display list items inline */
+    margin-left: 15px; /* Add spacing between items */
+}
+
+.navbar a {
+    text-decoration: none; /* Remove underline from links */
+    color: #fff; /* Set link color */
+    font-size: 1.2rem; /* Adjust font size */
+    padding: 5px 10px; /* Add padding for clickable area */
+    border-radius: 5px; /* Add rounded corners */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.navbar a:hover {
+    background-color: #89CFF0; /* Light blue background on hover */
+    color: #fff; /* White text on hover */
+}
+
+.navbar a:visited {
+    color: #fff; /* Set visited link color */
+}
+
+.career-form label {
+    font-size: 1rem; /* Adjust the font size */
+    font-weight: bold; /* Make the text bold */
+    color: #333; /* Set the text color */
+    display: block; /* Ensure the label is on its own line */
+    margin-bottom: 10px; /* Add spacing below the label */
+    text-align: center; /* Align the text to the left */
+    font-family: "Ribeye", serif; /* Use the same font as the main page for consistency */
+}
+
+.pstyle {
+    font-size: 1.1rem; /* Adjust the font size */
+    font-weight: normal; /* Set the font weight */
+    color: #333; /* Set a softer text color */
+    text-align: center; /* Center the text */
+    margin-bottom: 15px; /* Add spacing below the paragraph */
+    line-height: 1.6; /* Improve readability with line spacing */
+}
     </style>
 </head>
 <body>
 
+    <div class="logo">
+        <img src="{{ url_for('static', filename='images/6Yhval-LogoMakr.png') }}" alt="LOGO">
+    </div>
+
+    <div class="navbar">
+        <ul>
+            <li><a href="history.html">History</a></li>
+        </ul>
+    </div>
+
     <div class="container" id="career-input-container">
         <!-- Career Form -->
-        <h1>Welcome to Pathway</h1>
         <h2>What Career Field Would You Like to Pursue?</h2>
-        <p>Please type the career field you're interested in below:</p>
+        <p class="pstyle">Please type the career field you're interested in below:</p>
 
         <form id="career-form" class="career-form">
             <label for="career-field">Your Desired Career Field:</label><br>
