@@ -103,6 +103,29 @@ nav a:hover {
     overflow: hidden;
 }
 
+.lets-go-button {
+    background-color: #174e68; /* Baby blue background */
+    color: #ffffff; /* White text */
+    border: none; /* Remove default border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 15px 30px; /* Add padding for size */
+    font-size: 1.2rem; /* Adjust font size */
+    font-family: "Ribeye", serif; /* Match the site's font */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
+}
+
+.lets-go-button:hover {
+    background-color: #edf0f3; /* Darker blue on hover */
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+.button-container {
+    text-align: center; /* Center the button on the page */
+    margin-top: 20px; /* Add spacing above the button */
+}
+
 footer {
     background: #89CFF0;
     color: #ffffff;
