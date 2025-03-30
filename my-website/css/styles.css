@@ -26,6 +26,42 @@ main {
     height: auto;
 }
 
+.navbar {
+    position: absolute; /* Position the navbar relative to the page */
+    top: 20px; /* Distance from the top of the page */
+    right: 20px; /* Distance from the right of the page */
+    font-family: "Ribeye", serif; /* Match the site's font */
+}
+
+.navbar ul {
+    list-style: none; /* Remove default list styling */
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li {
+    display: inline; /* Display list items inline */
+    margin-left: 15px; /* Add spacing between items */
+}
+
+.navbar a {
+    text-decoration: none; /* Remove underline from links */
+    color: #fff; /* Set link color */
+    font-size: 1.2rem; /* Adjust font size */
+    padding: 5px 10px; /* Add padding for clickable area */
+    border-radius: 5px; /* Add rounded corners */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.navbar a:hover {
+    background-color: #89CFF0; /* Light blue background on hover */
+    color: #fff; /* White text on hover */
+}
+
+.navbar a:visited {
+    color: #fff; /* Set visited link color */
+}
+
 main p {
     text-align: center;
     display: inline-block;
@@ -34,7 +70,7 @@ main p {
     line-height: 1.6;
     font-family: "Ribeye", serif; /* Use a fun font for the paragraph */
     font-size: 2rem; /* Adjust font size for better readability */
-    padding: 20px; /* Add padding for better spacing */
+    padding: 10px; /* Add padding for better spacing */
     color: #fff;
 }
 
@@ -51,6 +87,14 @@ main p {
     line-height: 1.5; /* Line height for better readability */  
     text-align: center;
     margin: 20px;
+}
+
+.expandable-card h2 {
+    text-align: center; /* Center the heading text */
+    font-family: "Ribeye", serif; /* Use a fun font for the heading */
+    font-size: 2.5rem; /* Adjust font size for the heading */
+    line-height: 1.5; /* Line height for better readability */
+    color: #fff; /* Text color for the heading */
 }
 
 #ch {
