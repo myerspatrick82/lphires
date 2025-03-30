@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sequential Loading Example</title>
+  <style>
+    /* Global styles */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #a2d2ff; /* Light blue background */
+      margin: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      width: 60%;
+    }
+
+    /* Box styles */
+    .box {
+      width: 80%;
+      background-color: #fff;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .box h3 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    /* Progress bar container */
+    .progress-container {
+      width: 100%;
+      height: 20px;
+      background-color: #f3f3f3;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      overflow: hidden;
+    }
+
+    /* Progress bar styles */
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background-color: #3498db;
+      text-align: center;
+      line-height: 20px;
+      color: white;
+      font-weight: bold;
+      border-radius: 10px;
+    }
+
+    /* Button to calculate similarities */
+    #calculate-similarities {
+      display: none;
+      background-color: white; /* White background */
+      color: black; /* Black text */
+      padding: 15px 30px;
+      border: 2px solid black; /* Black border */
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    #calculate-similarities:hover {
+      background-color: #f1f1f1; /* Slightly gray background on hover */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Scraping box -->
+    <div class="box" id="scraping-box">
+      <h3>Scraping</h3>
+      <div class="progress-container">
+        <div class="progress-bar" id="scraping-bar">0%</div>
+      </div>
+    </div>
+
+    <!-- Summarizing box -->
+    <div class="box" id="summarizing-box">
+      <h3>Summarizing</h3>
+      <div class="progress-container">
+        <div class="progress-bar" id="summarizing-bar">0%</div>
+      </div>
+    </div>
+
+    <!-- Button to calculate similarities -->
+    <button id="calculate-similarities" onclick="calculateSimilarities()">Calculate Similarities</button>
+  </div>
+
+  <script>
+    // JavaScript to handle the loading and progress
+
+    function updateProgressBar(barId, progressTextId, targetId, nextFunction) {
+      var progress = 0;
+      var progressBar = document.getElementById(barId);
+      var progressText = document.getElementById(progressTextId);
+
+      var interval = setInterval(function() {
+        progress += 1; // Increment progress
+        progressBar.style.width = progress + "%"; // Update progress bar width
+        progressText.innerText = progress + "%"; // Update text inside the bar
+
+        // Once the progress reaches 100%, stop the interval and run the next task
+        if (progress >= 100) {
+          clearInterval(interval);
+          // Once "Scraping" is done, show "Summarizing"
+          if (nextFunction) {
+            nextFunction();
+          } else {
+            // If both loading bars are done, show the Calculate button
+            document.getElementById(targetId).style.display = "block";
+          }
+        }
+      }, 50); // Change to adjust the speed of progress
+    }
+
+    // Start Scraping progress bar
+    window.onload = function() {
+      updateProgressBar('scraping-bar', 'scraping-bar', 'summarizing-box', startSummarizing);
+    };
+
+    // Start Summarizing progress bar once Scraping is complete
+    function startSummarizing() {
+      updateProgressBar('summarizing-bar', 'summarizing-bar', 'calculate-similarities');
+    }
+
+    // Calculate Similarities button click handler
+    function calculateSimilarities() {
+      alert("Calculating Similarities...");
+    }
+  </script>
+  
+</body>
+</html>
