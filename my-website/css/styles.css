@@ -25,10 +25,16 @@ main p {
     padding: 20px; /* Add padding for better spacing */
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .expandable-card {
     background-color: #ffffff; /* Card background color */
     width: 90%;
-    padding: 20px; /* Padding inside the card */
+    padding: 10px; /* Padding inside the card */
     border-radius: 10px; /* Rounded corners for the card */
     line-height: 1.5; /* Line height for better readability */  
     text-align: center;
@@ -52,14 +58,13 @@ main p {
 }
 
 label {
-    display: inline-block; /* Display label as inline-block */
     cursor: pointer; /* Change cursor to pointer for better UX */
     color: #ffffff; /* Text color for the label */
     background-color: #89CFF0;
     padding: 10px 13px; /* Padding around the label text */
     border-radius: 3px;
-    margin-top: 12px;
-
+    margin: 12px auto;
+    text-align: center; /* Center text within the label */
 
 }
 
@@ -104,6 +109,7 @@ nav a:hover {
 }
 
 .lets-go-button {
+    display: inline-block;
     background-color: #174e68; /* Baby blue background */
     color: #ffffff; /* White text */
     border: none; /* Remove default border */
