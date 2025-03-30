@@ -91,10 +91,12 @@ def scrape_wikipedia_category(category_url, field):
     # field = input("Enter the relevant field to filter bios (e.g., data analytics): ")
 
     with open("scrape.txt", "w", encoding="utf-8") as f:
-        for name in names:
+        for i, name in enumerate(names):
             bio = get_wikipedia_bio(name, field)
             if bio:
                 f.write(f"\n\n=== {name} ===\n{bio}")
+            progress = int((i + 1) / len(names) * 100)
+            update_progress(scraping_percent=progress)
             time.sleep(1)
 
 def is_likely_human_name(name):
@@ -166,9 +168,26 @@ def search_top_people(field):
     choice = input("Enter the number of the link you want to scrape names from: ").strip()
     if choice.isdigit() and 1 <= int(choice) <= len(links):
         selected_url = links[int(choice) - 1]
-        extract_names_from_webpage(selected_url)
+        extract_names_from_webpage(selected_url, field)
     else:
         print("Invalid choice.")
+
+import json
+def update_progress(scraping_percent=None, summarizing_percent=None):
+    try:
+        with open("progress.json", "r") as f:
+            data = json.load(f)
+    except:
+        data = {"scraping": 0, "summarizing": 0}
+
+    if scraping_percent is not None:
+        data["scraping"] = scraping_percent
+    if summarizing_percent is not None:
+        data["summarizing"] = summarizing_percent
+
+    with open("progress.json", "w") as f:
+        json.dump(data, f)
+
 
 def main():
     # mode = input("Choose mode: 'wikipedia' or 'web': ").strip().lower()
@@ -186,8 +205,8 @@ def main():
         sys.exit(1)
 
     field = sys.argv[1]
-    category_url = "/wiki/Category:" + field.strip().replace(" ", "_")
-    scrape_wikipedia_category(category_url, field)
+    update_progress(scraping_percent=0, summarizing_percent=0)
+    search_top_people(field)
 
 if __name__ == "__main__":
     main()

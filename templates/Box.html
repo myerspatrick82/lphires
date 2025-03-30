@@ -120,51 +120,74 @@
       alert("You clicked on " + step);
     }
 
-    function revealFlowchart() {
-      const nodes = document.querySelectorAll('.node');
-      const connectors = document.querySelectorAll('.connector');
-      
-      document.querySelector('.flowchart').style.opacity = 1;
-      let nodeDelay = 0;
-      let connectorDelay = 500;
 
-      for (let i = nodes.length - 1; i >= 0; i--) {
-        setTimeout(() => {
-          nodes[i].classList.add('show');
-        }, nodeDelay);
-        nodeDelay += 1000;
-      }
-
-      for (let i = connectors.length - 1; i >= 0; i--) {
-        setTimeout(() => {
-          connectors[i].classList.add('show');
-        }, connectorDelay);
-        connectorDelay += 1000;
-      }
-    }
-
-    function restartProgress() {
-      // Go back to the first page (PartOne.html)
-      window.location.href = "PartOne.html"; 
-    }
-
-    window.onload = revealFlowchart;
   </script>
 </head>
 <body>
   <div class="flowchart-container">
-    <div class="flowchart">
-      <div class="node" onclick="openModal('Step 1')">Step 1</div>
-      <div class="connector"></div>
-      <div class="node" onclick="openModal('Step 2')">Step 2</div>
-      <div class="connector"></div>
-      <div class="node" onclick="openModal('Step 3')">Step 3</div>
-      <div class="connector"></div>
-      <div class="node" onclick="openModal('Step 4')">Step 4</div>
-      <div class="connector"></div>
-      <div class="node" onclick="openModal('End')">End</div>
+    <div class="flowchart" id="flowchart">
+      <!-- Boxes will be inserted here dynamically -->
     </div>
   </div>
+  
+
+  <script>
+    const rawText = `{{ analysis | safe }}`;
+  
+    function parseSteps(text) {
+      const stepSections = text.split("##").map(section => section.trim()).filter(Boolean);
+      const parsedSteps = [];
+  
+      stepSections.forEach(section => {
+        const lines = section.split("\n");
+        const title = lines[0].trim();
+        const content = lines.slice(1).join("<br>").trim();
+        parsedSteps.push({ title, content });
+      });
+  
+      return parsedSteps;
+    }
+  
+    function renderFlowchart(steps) {
+      const container = document.getElementById("flowchart");
+      container.innerHTML = "";
+  
+      for (let i = steps.length - 1; i >= 0; i--) {
+        const step = steps[i];
+  
+        const node = document.createElement("div");
+        node.className = "node";
+        node.innerHTML = `<strong>${step.title}</strong><br><small>${step.content}</small>`;
+        node.onclick = () => alert(step.title);
+  
+        container.appendChild(node);
+  
+        if (i > 0) {
+          const connector = document.createElement("div");
+          connector.className = "connector";
+          container.appendChild(connector);
+        }
+      }
+  
+      // Trigger animations
+      document.querySelector('.flowchart').style.opacity = 1;
+      const nodes = document.querySelectorAll('.node');
+      const connectors = document.querySelectorAll('.connector');
+  
+      nodes.forEach((node, i) => {
+        setTimeout(() => node.classList.add("show"), i * 600);
+      });
+      connectors.forEach((conn, i) => {
+        setTimeout(() => conn.classList.add("show"), i * 600 + 300);
+      });
+    }
+  
+    window.onload = () => {
+      const parsed = parseSteps(rawText);
+      renderFlowchart(parsed);
+    };
+  </script>
+  
 
   <!-- Restart Button -->
   <button id="restart-btn" onclick="restartProgress()">Restart</button>

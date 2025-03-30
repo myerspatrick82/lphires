@@ -128,20 +128,10 @@
     </div>
 
     <div class="container" id="sequential-loading" style="display:none;">
-        <!-- Scraping box -->
-        <div class="box" id="scraping-box">
-            <h3>Scraping</h3>
-            <div class="progress-container">
-                <div class="progress-bar" id="scraping-bar">0%</div>
-            </div>
-        </div>
-
-        <!-- Summarizing box -->
-        <div class="box" id="summarizing-box">
-            <h3>Summarizing</h3>
-            <div class="progress-container">
-                <div class="progress-bar" id="summarizing-bar">0%</div>
-            </div>
+        <!-- Simple loading text -->
+        <div class="box" id="loading-status">
+            <h3>Processing your request...</h3>
+            <p>Please wait while we scrape and summarize career data.</p>
         </div>
 
         <!-- Button to calculate similarities -->
@@ -150,7 +140,6 @@
 
     <script>
         // JavaScript to handle form submission and progress bars
-
         // Event listener for the career form submission
         document.getElementById("career-form").addEventListener("submit", function(event) {
             event.preventDefault();
@@ -170,8 +159,8 @@
             })
             .then(response => response.json())
             .then(data => {
-                console.log("✅ Scraping started:", data);
-                updateProgressBar('scraping-bar', 'scraping-bar', 'summarizing-box', startSummarizing);
+                console.log("Scraping started:", data);
+                showDoneButton();
             })
             .catch(error => {
                 console.error("Error starting scraper:", error);
@@ -180,40 +169,29 @@
         
 
         // Function to update the progress bar
-        function updateProgressBar(barId, progressTextId, targetId, nextFunction) {
-            var progress = 0;
-            var progressBar = document.getElementById(barId);
-            var progressText = document.getElementById(progressTextId);
-
-            var interval = setInterval(function() {
-                progress += 1; // Increment progress
-                progressBar.style.width = progress + "%"; // Update progress bar width
-                progressText.innerText = progress + "%"; // Update text inside the bar
-
-                // Once the progress reaches 100%, stop the interval and run the next task
-                if (progress >= 100) {
-                    clearInterval(interval);
-                    // Once "Scraping" is done, show "Summarizing"
-                    if (nextFunction) {
-                        nextFunction();
-                    } else {
-                        // If both loading bars are done, show the Calculate button
-                        document.getElementById(targetId).style.display = "block";
-                    }
-                }
-            }, 50); // Change to adjust the speed of progress
+        function showDoneButton() {
+            document.getElementById("calculate-similarities").style.display = "block";
+            const loadingBox = document.getElementById("loading-status");
+            loadingBox.innerHTML = "<h3>✅ Scraping & Summarizing Complete!</h3><p>You may now calculate similarities.</p>";
         }
-
-        // Start Summarizing progress bar once Scraping is complete
-        function startSummarizing() {
-            updateProgressBar('summarizing-bar', 'summarizing-bar', 'calculate-similarities');
-        }
+    
 
         // Calculate Similarities button click handler
         function calculateSimilarities() {
-            alert("Calculating Similarities...");
-            // You can add the next step here, e.g., redirect to another page
-            window.location.href = "box.html"; // Redirect to another page after calculation
+            fetch("/calculate-similarities", {
+                method: "POST"
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = "/box"; // Go to Box.html after script finishes
+                } else {
+                    alert("Error: " + data.error);
+                }
+            })
+            .catch(error => {
+                console.error("Similarity calculation failed:", error);
+            });
         }
     </script>
   
