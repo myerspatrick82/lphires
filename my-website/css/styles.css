@@ -3,6 +3,7 @@ body {
     font-family: "Ribeye", serif; /* Use a unique font for the body */
     background-color: #f4f4f4;
     justify-content: center;
+    
 }
 
 main {
@@ -12,7 +13,17 @@ main {
     align-items: center; /* Center content horizontally */
     min-height: 100vh; /* Ensure the main section takes full height of the viewport */  
     text-align: center; /* Center text within the main section */
-    background: #89CFF0;
+    background: #fff;
+    background-image: url('../images/sky-34536_1920.png'); /* Set a background image for the body */
+}
+
+.logo {
+    position: absolute; /* Position the logo absolutely to the top left */
+    padding: 15px;
+    top: 20px; /* Adjust the top position */
+    left: 20px; /* Adjust the left position */
+    width: 100px; /* Set a fixed width for the logo */
+    height: auto;
 }
 
 main p {
@@ -24,6 +35,7 @@ main p {
     font-family: "Ribeye", serif; /* Use a fun font for the paragraph */
     font-size: 2rem; /* Adjust font size for better readability */
     padding: 20px; /* Add padding for better spacing */
+    color: #fff;
 }
 
 * {
@@ -33,7 +45,6 @@ main p {
 }
 
 .expandable-card {
-    background-color: #ffffff; /* Card background color */
     width: 50%;
     padding: 22px 30px; /* Padding inside the card */
     border-radius: 10px; /* Rounded corners for the card */
@@ -70,13 +81,7 @@ label {
 
 }
 
-header {
-    background: #89CFF0;
-    color: #ffffff;
-    padding-top: 30px;
-    padding-bottom: 5px;
-    text-align: center;
-}
+
 
 img.network-tree {
     width: 80%; /* Make the image responsive */
