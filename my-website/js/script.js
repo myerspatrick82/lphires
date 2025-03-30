@@ -8,4 +8,24 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Button was clicked!');
         });
     }
-});
+
+    function selectRole(role) {
+    switch (role) {
+        case 'pop-artist':
+            window.location.href = 'roles/pop-artist.html';
+            break;
+        case 'ai-researcher':
+            window.location.href = 'roles/ai-researcher.html';
+            break;
+        case 'data-analyst':
+            window.location.href = 'roles/data-analyst.html';
+            break;
+        default:
+            console.error('Unknown role:', role);
+    }
+}
+
+    
+    
+}
+);
