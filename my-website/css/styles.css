@@ -74,70 +74,16 @@ main p {
     color: #fff;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-.expandable-card {
-    width: 50%;
-    padding: 22px 30px; /* Padding inside the card */
-    border-radius: 10px; /* Rounded corners for the card */
-    line-height: 1.5; /* Line height for better readability */  
-    text-align: center;
-    margin: 20px;
-}
-
-.expandable-card h2 {
-    text-align: center; /* Center the heading text */
-    font-family: "Ribeye", serif; /* Use a fun font for the heading */
-    font-size: 2.5rem; /* Adjust font size for the heading */
-    line-height: 1.5; /* Line height for better readability */
-    color: #fff; /* Text color for the heading */
-}
-
-#ch {
-    display: none;
-}
-
-#ch:checked ~ .card-content {
-    display: block;  
-}
-
-#ch:checked ~ label {
-    display: none;
-}
-
-.card-content {
-    display: none; /* Hide content by default */
-}
-
-label {
-    display: inline-block; /* Make label inline-block for better spacing */
-    cursor: pointer; /* Change cursor to pointer for better UX */
-    color: #ffffff; /* Text color for the label */
-    background-color: #89CFF0;
-    padding: 10px 13px; /* Padding around the label text */
-    border-radius: 3px;
-    margin-top: 12px;
-    text-align: center; /* Center text within the label */
-
-}
-
-
-
-img.network-tree {
-    width: 80%; /* Make the image responsive */
-    height: auto; /* Maintain aspect ratio */
-    border: 50px solid #89CFF0; /* Optional: Add a border around the image */
-    display: block; /* Center the image */
-    box-sizing: border-box;
-}
-
 h1 {
     margin: 0;
+    font-family: "Ribeye", serif; /* Use a unique font for the heading */
+    display: inline-block; /* Allow the heading to be centered */
+    margin: 20px auto; /* Center the heading with auto margins */
+    padding: 10px; /* Add padding for better spacing */
+    color: #fff;;
 }
+
+
 
 nav {
     margin: 20px 0;

@@ -1,45 +1,206 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pathway</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Pathway - Career Path Finder</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #a2d2ff; /* Light blue background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ribeye+Marrow&display=swap" rel="stylesheet">
+        .container {
+            text-align: center;
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 60%;
+        }
+
+        h1, h2 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .career-form {
+            margin-bottom: 20px;
+        }
+
+        .career-form input {
+            padding: 10px;
+            font-size: 16px;
+            width: 80%;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .career-form button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .career-form button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Box styles for progress bars */
+        .box {
+            width: 80%;
+            background-color: #fff;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Progress bar container */
+        .progress-container {
+            width: 100%;
+            height: 20px;
+            background-color: #f3f3f3;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        /* Progress bar styles */
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: #3498db;
+            text-align: center;
+            line-height: 20px;
+            color: white;
+            font-weight: bold;
+            border-radius: 10px;
+        }
+
+        /* Calculate button */
+        #calculate-similarities {
+            display: none;
+            padding: 12px 25px;
+            font-size: 18px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #calculate-similarities:hover {
+            background-color: #2980b9;
+        }
+
+        #sequential-loading {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <img src ="images/6Yhval-LogoMakr.png" alt="Pathfinder Logo" style="width: 250px; height: auto;">
-    </header>
-    <main>
-        <img src="images/high_res_fir_tree_network.jpg" alt="Network Tree" class="network-tree">
-        
-        <div class="expandable-card">
-            <input id="ch" type="checkbox">
 
-            <h2>Welcome to Pathway</h2>
+    <div class="container" id="career-input-container">
+        <!-- Career Form -->
+        <h1>Welcome to Pathway</h1>
+        <h2>What Career Field Would You Like to Pursue?</h2>
+        <p>Please type the career field you're interested in below:</p>
 
-            <p>Pathway is a platform designed to help you navigate your journey through 
-                the world of technology and innovation. 
-                Whether you're a beginner or an experienced professional, we have resources to support your growth.</p>
+        <form id="career-form" class="career-form">
+            <label for="career-field">Your Desired Career Field:</label><br>
+            <input type="text" id="career-field" name="career-field" placeholder="e.g., Software Engineering, Medicine, etc." required><br><br>
+            <button type="submit" class="enter-btn">Enter</button>
+        </form>
+    </div>
 
-            <div class="card-content">
-                <p>At Pathway, our mission is to empower individuals to reach their full potential by providing 
-                    accessible and comprehensive resources in technology and innovation.</p>
-
-                <label for="ch">Show Less</label>
+    <div class="container" id="sequential-loading" style="display:none;">
+        <!-- Scraping box -->
+        <div class="box" id="scraping-box">
+            <h3>Scraping</h3>
+            <div class="progress-container">
+                <div class="progress-bar" id="scraping-bar">0%</div>
             </div>
-
-            <label for="ch">Read More</label>
         </div>
-    </main>
-    <footer>
-        <p>&copy; 2023 Pathway</p>
-    </footer>
-    <script src="js/script.js"></script>
+
+        <!-- Summarizing box -->
+        <div class="box" id="summarizing-box">
+            <h3>Summarizing</h3>
+            <div class="progress-container">
+                <div class="progress-bar" id="summarizing-bar">0%</div>
+            </div>
+        </div>
+
+        <!-- Button to calculate similarities -->
+        <button id="calculate-similarities" onclick="calculateSimilarities()">Calculate Similarities</button>
+    </div>
+
+    <script>
+        // JavaScript to handle form submission and progress bars
+
+        // Event listener for the career form submission
+        document.getElementById("career-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var careerField = document.getElementById("career-field").value;
+
+            // Hide the career input form and show the sequential loading page
+            document.getElementById('career-input-container').style.display = 'none';
+            document.getElementById('sequential-loading').style.display = 'block';
+
+            // Start the progress bars
+            updateProgressBar('scraping-bar', 'scraping-bar', 'summarizing-box', startSummarizing);
+        });
+
+        // Function to update the progress bar
+        function updateProgressBar(barId, progressTextId, targetId, nextFunction) {
+            var progress = 0;
+            var progressBar = document.getElementById(barId);
+            var progressText = document.getElementById(progressTextId);
+
+            var interval = setInterval(function() {
+                progress += 1; // Increment progress
+                progressBar.style.width = progress + "%"; // Update progress bar width
+                progressText.innerText = progress + "%"; // Update text inside the bar
+
+                // Once the progress reaches 100%, stop the interval and run the next task
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    // Once "Scraping" is done, show "Summarizing"
+                    if (nextFunction) {
+                        nextFunction();
+                    } else {
+                        // If both loading bars are done, show the Calculate button
+                        document.getElementById(targetId).style.display = "block";
+                    }
+                }
+            }, 50); // Change to adjust the speed of progress
+        }
+
+        // Start Summarizing progress bar once Scraping is complete
+        function startSummarizing() {
+            updateProgressBar('summarizing-bar', 'summarizing-bar', 'calculate-similarities');
+        }
+
+        // Calculate Similarities button click handler
+        function calculateSimilarities() {
+            alert("Calculating Similarities...");
+            // You can add the next step here, e.g., redirect to another page
+            window.location.href = "box.html"; // Redirect to another page after calculation
+        }
+    </script>
+  
 </body>
 </html>
