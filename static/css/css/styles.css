@@ -1,0 +1,241 @@
+body {
+    margin: 0;
+    font-family: "Ribeye", serif; /* Use a unique font for the body */
+    background-color: #f4f4f4;
+    justify-content: center;
+    
+}
+
+main {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    min-height: 100vh; /* Ensure the main section takes full height of the viewport */  
+    text-align: center; /* Center text within the main section */
+    background: #fff;
+    background-image: url('../images/sky-34536_1920.png'); /* Set a background image for the body */
+}
+
+.logo {
+    position: absolute; /* Position the logo absolutely to the top left */
+    padding: 15px;
+    top: 20px; /* Adjust the top position */
+    left: 20px; /* Adjust the left position */
+    width: 100px; /* Set a fixed width for the logo */
+    height: auto;
+}
+
+.navbar {
+    position: absolute; /* Position the navbar relative to the page */
+    top: 20px; /* Distance from the top of the page */
+    right: 20px; /* Distance from the right of the page */
+    font-family: "Ribeye", serif; /* Match the site's font */
+}
+
+.navbar ul {
+    list-style: none; /* Remove default list styling */
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li {
+    display: inline; /* Display list items inline */
+    margin-left: 15px; /* Add spacing between items */
+}
+
+.navbar a {
+    text-decoration: none; /* Remove underline from links */
+    color: #fff; /* Set link color */
+    font-size: 1.2rem; /* Adjust font size */
+    padding: 5px 10px; /* Add padding for clickable area */
+    border-radius: 5px; /* Add rounded corners */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.navbar a:hover {
+    background-color: #89CFF0; /* Light blue background on hover */
+    color: #fff; /* White text on hover */
+}
+
+.navbar a:visited {
+    color: #fff; /* Set visited link color */
+}
+
+main p {
+    text-align: center;
+    display: inline-block;
+    margin: 20px 0;
+    width: 90%;
+    line-height: 1.6;
+    font-family: "Ribeye", serif; /* Use a fun font for the paragraph */
+    font-size: 2rem; /* Adjust font size for better readability */
+    padding: 10px; /* Add padding for better spacing */
+    color: #fff;
+}
+
+h1 {
+    margin: 0;
+    font-family: "Ribeye", serif; /* Use a unique font for the heading */
+    display: inline-block; /* Allow the heading to be centered */
+    margin: 20px auto; /* Center the heading with auto margins */
+    padding: 10px; /* Add padding for better spacing */
+    color: #fff;;
+}
+
+
+
+nav {
+    margin: 20px 0;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 15px;
+}
+
+nav a:hover {
+    background: #e8491d;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.lets-go-button {
+    display: inline-block;
+    background-color: #174e68; /* Baby blue background */
+    color: #ffffff; /* White text */
+    border: none; /* Remove default border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 15px 30px; /* Add padding for size */
+    font-size: 1.2rem; /* Adjust font size */
+    font-family: "Ribeye", serif; /* Match the site's font */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
+}
+
+.lets-go-button:hover {
+    background-color: #edf0f3; /* Darker blue on hover */
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+.button-container {
+    text-align: center; /* Center the button on the page */
+    margin-top: 20px; /* Add spacing above the button */
+}
+
+footer {
+    background: #89CFF0;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.landing {
+    text-align: center;
+    padding: 2rem;
+    color: #222;
+}
+
+.role-options {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.role-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    width: 260px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.role-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.role-card h3 {
+    margin-bottom: 0.5rem;
+}
+
+.role-card {
+    background-size: cover;
+    background-position: center;
+    border-radius: 16px;
+    width: 260px;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.role-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.role-card .overlay {
+    background: rgba(0, 0, 0, 0.5); /* Darken for readability */
+    color: white;
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    box-sizing: border-box;
+}
+
+.role-card h3,
+.role-card p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    line-height: 1.4;
+    padding: 0 10px;
+}
+
+/* Add background images */
+.pop-artist {
+    background-image: url('../images/1.png');
+}
+
+.ai-researcher {
+    background-image: url('../images/3.jpeg');
+}
+
+.data-analyst {
+    background-image: url('../images/2.jpg');
+}
+
+.role-card h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.role-card p {
+    font-size: 0.95rem;
+}
+
+

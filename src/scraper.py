@@ -1,4 +1,4 @@
-# web_scraper.py
+# scraper.py
 
 import requests
 from bs4 import BeautifulSoup
@@ -6,6 +6,7 @@ import wikipediaapi
 import re
 import time
 import os
+import sys
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -19,6 +20,15 @@ def clean_text(text):
     text = re.sub(r"\([^)]*\)", "", text)
     text = re.sub(r"\s+", " ", text).strip()
     return text
+
+def run_scraper(field, category_url=None, mode="wikipedia", selected_link=None):
+    if mode == "wikipedia":
+        return scrape_wikipedia_category(category_url, field)
+    elif mode == "web":
+        return extract_names_from_webpage(selected_link, field)
+    else:
+        print("Invalid mode")
+        return
 
 def remove_sections(text, stop_titles=["References", "External links", "See also"]):
     for title in stop_titles:
@@ -46,7 +56,7 @@ def get_wikipedia_bio(name, field=None):
     print(f"No Wikipedia page found for: {name}")
     return None
 
-def scrape_wikipedia_category(category_url):
+def scrape_wikipedia_category(category_url, field):
     print(f"Scraping Wikipedia category: {category_url}")
     base_url = "https://en.wikipedia.org"
     start_url = category_url
@@ -78,7 +88,7 @@ def scrape_wikipedia_category(category_url):
 
     print(f"\nTotal names collected: {len(names)}")
 
-    field = input("Enter the relevant field to filter bios (e.g., data analytics): ")
+    # field = input("Enter the relevant field to filter bios (e.g., data analytics): ")
 
     with open("scrape.txt", "w", encoding="utf-8") as f:
         for name in names:
@@ -91,7 +101,7 @@ def is_likely_human_name(name):
     parts = name.strip().split()
     return 1 < len(parts) <= 4 and all(part[0].isupper() for part in parts)
 
-def extract_names_from_webpage(url):
+def extract_names_from_webpage(url, field):
 
     import spacy
     nlp = spacy.load("en_core_web_trf")
@@ -114,7 +124,6 @@ def extract_names_from_webpage(url):
 
         print(f"Found {len(names)} person names using NER.")
 
-        field = input("Enter the relevant field to filter bios (e.g., data analytics): ")
 
         with open("scrape.txt", "w", encoding="utf-8") as f:
             for name in sorted(names):
@@ -162,15 +171,23 @@ def search_top_people(field):
         print("Invalid choice.")
 
 def main():
-    mode = input("Choose mode: 'wikipedia' or 'web': ").strip().lower()
-    if mode == "wikipedia":
-        user_input = input("Enter a Wikipedia category path (e.g., /wiki/Category:Artificial_intelligence_researchers): ")
-        scrape_wikipedia_category(user_input.strip())
-    elif mode == "web":
-        field = input("Enter a field of interest (e.g., data analytics): ")
-        search_top_people(field)
-    else:
-        print("Invalid mode. Please enter 'wikipedia' or 'web'.")
+    # mode = input("Choose mode: 'wikipedia' or 'web': ").strip().lower()
+    # if mode == "wikipedia":
+    #     user_input = input("Enter a Wikipedia category path (e.g., /wiki/Category:Artificial_intelligence_researchers): ")
+    #     scrape_wikipedia_category(user_input.strip())
+    # elif mode == "web":
+    #     field = input("Enter a field of interest (e.g., data analytics): ")
+    #     search_top_people(field)
+    # else:
+    #     print("Invalid mode. Please enter 'wikipedia' or 'web'.")
+
+    if len(sys.argv) < 2:
+        print("Usage: python scraper.py <career field>")
+        sys.exit(1)
+
+    field = sys.argv[1]
+    category_url = "/wiki/Category:" + field.strip().replace(" ", "_")
+    scrape_wikipedia_category(category_url, field)
 
 if __name__ == "__main__":
     main()
